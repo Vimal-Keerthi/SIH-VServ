@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Speech Recognition in Python</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/index.css') }}" />
+</head>
+<body>
+<div id="speechContainer">
+    <h1>Upload new File</h1>
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" accept="audio/*" name="file"/>
+        <br>
+        <input type="submit" id="submitButton" value="Predict"/>
+    </form>
+    {% if final != "" %}
+        <div id="speechTranscriptContainer">
+            <h1>Predicted Probabilities for Problems</h1>
+            <table border="1">
+                <th>Problem</th>
+                <th>Probability</th>
+
+                {% for key,value in  transcript.items() %}
+                    <tr>
+                            {% if key == final %}
+                                <td id = "fin"> {{ key }} </td>
+                                <td id = "fin1"> {{ value }} </td>
+                            {% endif %}
+                            {% if key != final %}
+                                <td> {{ key }} </td>
+                                <td> {{ value }} </td>
+                            {% endif %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
